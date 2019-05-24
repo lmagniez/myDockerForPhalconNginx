@@ -29,16 +29,16 @@ services:
         DB_DATABASE: database
         DB_USER: admin
         DB_PASSWORD: test
-    logging:
-      driver: "gelf"
-      options:
-        gelf-address: "udp://localhost:12201"
-        tag: "first-logs"
 
   db:
-    image: mariadb
+    build:
+      context: ./docker/mariadb
+      dockerfile: Dockerfile
     volumes:
-      - ./mysql:/var/lib/mysql
+      #- ./docker/mariadb/db-data:/var/lib/mysql
+      - ./docker/mariadb/db-init:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: admin
