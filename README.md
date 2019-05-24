@@ -38,7 +38,7 @@ db login are available and can be change in docker-compose.yml.
 ## 1.3 Access to the phalcon app
 
 Url to access the app:
-localhost:8080/< appName >/
+localhost:8080/
 
 # 2. How to configure
 
