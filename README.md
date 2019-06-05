@@ -38,7 +38,7 @@ db login are available and can be change in docker-compose.yml.
 ## 1.3 Access to the phalcon app
 
 Url to access the app:
-phaphalcon.com/< appName >/
+localhost:8080/
 
 # 2. How to configure
 
@@ -64,12 +64,13 @@ in the /docker-compose.yml file, change the environment values in both db and ph
     [...]
 ```
 
-## 2.1 Insert database script
-...
+## 2.2 Insert database script
 
-## 2.2 Insert phalcon app
-- In the /code folder, insert your app folder.
+Script are added automatically to the database.
+When executing docker-compose, the db component will execute the script in the docker/maria_db/db_init/1_ddl.sql file.
 
+## 2.3 Insert phalcon app
+- In the /code folder, insert your app folder. (A sample project is already included)
 - In the /site.conf file, change every "sample-project" with your project name.
 ```
 server {
