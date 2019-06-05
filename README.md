@@ -18,6 +18,7 @@ The project use several components:
 docker-compose up
 ```
 phpmyadmin component port: 8090
+
 web component port: 8080
 
 Accès en bash
