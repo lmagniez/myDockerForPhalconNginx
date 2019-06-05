@@ -1,0 +1,77 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="container">
+
+    <p> <br></p>
+
+    <button type="button" class="btn btn-dark" onClick='location.href="<?php echo $this->url->get("articles/index");?>"'>Go back</button>
+
+    <div class="page-header">
+        <h1 class="display-2" style="font-weight: bold;">Edit comment</h1>
+    </div>
+
+    <?php echo $this->getContent(); ?>
+
+    <?php
+        echo $this->tag->form(
+            [
+                "comments/save",
+                "autocomplete" => "off",
+                "class" => "form-horizontal"
+            ]
+        );
+    ?>
+
+    <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+        value='<?php echo $this->security->getToken() ?>'/>
+
+    <div class="form-group">
+        <label for="fieldId" class="col-sm-2 control-label">Id</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["id", "type" => "number", "class" => "form-control", "id" => "fieldId"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldContent" class="col-sm-2 control-label">Content</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["content", "size" => 30, "class" => "form-control", "id" => "fieldContent"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldDatePublication" class="col-sm-2 control-label">Date Of Publication</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["date_publication", "type" => "date", "class" => "form-control", "id" => "fieldDatePublication"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldArticleid" class="col-sm-2 control-label">ArticleId</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["articleId", "type" => "number", "class" => "form-control", "id" => "fieldArticleid"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldUserid" class="col-sm-2 control-label">UserId</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["userId", "type" => "number", "class" => "form-control", "id" => "fieldUserid"]) ?>
+        </div>
+    </div>
+
+
+    <?php echo $this->tag->hiddenField("id") ?>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-info"]) ?>
+        </div>
+    </div>
+
+    <?php echo $this->tag->endForm(); ?>
+</div>

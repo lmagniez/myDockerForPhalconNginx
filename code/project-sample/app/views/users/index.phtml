@@ -1,0 +1,110 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="container">
+
+  <div class="row">
+    <div class="page-header">
+        <?php if ($this->session->has('auth')) {?>
+            <h1 class="display-2" style="font-weight: bold;">Search user</h1>
+        <?php } else {?>
+            <h1 class="display-2" style="font-weight: bold;">Log in</h1>
+        <?php } ?>
+    </div>
+
+    <?php echo $this->getContent() ?>
+
+  </div>
+
+<br>
+
+<?php if ($this->session->has('auth')) {?>
+    <?php
+    echo $this->tag->form(
+        [
+            "users/search",
+            "autocomplete" => "off",
+            "class" => "form-horizontal",
+        ]
+    );
+    ?>
+
+    <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+        value='<?php echo $this->security->getToken() ?>'/>
+
+    <div class="form-group">
+        <label for="fieldId" class="col-sm-2 control-label">Id</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["id", "type" => "number", "class" => "form-control", "id" => "fieldId"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldPseudo" class="col-sm-2 control-label">Pseudo</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["pseudo", "size" => 30, "class" => "form-control", "id" => "fieldPseudo"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldEmail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["email", "size" => 30, "class" => "form-control", "id" => "fieldEmail"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <?php echo $this->tag->submitButton(["Search", "class" => "btn btn-info"]) ?>
+        </div>
+    </div>
+
+    <?php echo $this->tag->endForm(); ?>
+
+<?php } else {?>
+
+    <?php
+    echo $this->tag->form(
+        [
+            "users/login",
+            "autocomplete" => "off",
+            "class" => "form-horizontal",
+        ]
+    );
+    ?>
+
+    <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+        value='<?php echo $this->security->getToken() ?>'/>
+
+    <div class="form-group">
+        <label for="fieldPseudo" class="col-sm-2 control-label">Pseudo</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->textField(["pseudo", "size" => 30, "class" => "form-control", "id" => "fieldPseudo"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldPassword" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->passwordField(["password", "size" => 30, "class" => "form-control", "id" => "fieldPassword"]) ?>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-info" onClick='location.href="<?php echo $this->url->get("users/new");?>"'>Sign up</button>
+            <?php echo $this->tag->submitButton(["Log In", "class" => "button btn btn-info"]) ?>
+        </div>
+    </div>
+
+    <?php echo $this->tag->endForm(); ?>
+
+<?php }?>
+
+
+</div>
